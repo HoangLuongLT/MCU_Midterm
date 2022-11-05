@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item key="selection" value="&#x09;&#x09;&#x09;&#x09;&#x09;if(!is3secondPressed[i]){"/>
+		<list key="findhistory">
+			<item value="&#x09;&#x09;&#x09;&#x09;&#x09;if(!is3secondPressed[i]){"/>
+			<item value="if(!is3secondPressed[i]){"/>
+			<item value="int keyReg0[3]= {NORMAL_STATE,NORMAL_STATE,NORMAL_STATE};"/>
+			<item value="int keyReg0 = NORMAL_STATE;"/>
+		</list>
+	</section>
+</section>

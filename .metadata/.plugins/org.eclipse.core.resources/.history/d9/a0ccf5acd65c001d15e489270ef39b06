@@ -1,0 +1,58 @@
+/*
+ * fsm_simple_buttons_run.c
+ *
+ *  Created on: Nov 5, 2022
+ *      Author: Luong
+ */
+
+
+#include "fsm_simple_buttons.h"
+
+void fsm_simple_buttons_run () {
+	switch (status) {
+		case RESET:
+			numberCounter=0;
+			if(led==1){
+				display7SEG(numberCounter);
+				led=0;
+			}
+			if(isButtonPress(1)){
+				status=INC_NORMAL;
+				led=1;
+			}
+			if(isButtonPress(2)){
+				status=DEC_NORMAL;
+				led=1;
+			}
+			break;
+		case INC_NORMAL:
+			if(numberCounter==9) numberCounter=0;
+			display7SEG(++numberCounter);
+			if(isButtonPress(0)){
+				status=RESET;
+			}
+			if(isButtonPress(1)){
+				status=INC_NORMAL;
+			}
+			if(isButtonPress(2)){
+				status=DEC_NORMAL;
+			}
+			break;
+		case DEC_NORMAL:
+			if(numberCounter==0) numberCounter=9;
+			display7SEG(--numberCounter);
+			if(isButtonPress(0)){
+				status=RESET;
+			}
+			if(isButtonPress(1)){
+				status=INC_NORMAL;
+			}
+			if(isButtonPress(2)){
+				status=DEC_NORMAL;
+			}
+			break;
+		default:
+			break;
+
+	}
+}

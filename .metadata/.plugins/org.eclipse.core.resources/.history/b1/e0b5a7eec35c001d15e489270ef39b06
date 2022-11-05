@@ -1,0 +1,52 @@
+/*
+ * input_reading.c
+ *
+ *  Created on: Nov 5, 2022
+ *      Author: Luong
+ */
+
+
+#include "main.h"
+#include "button.h"
+#include "output_display.h"
+
+//int keyReg0[3]= {NORMAL_STATE,NORMAL_STATE,NORMAL_STATE};
+//int keyReg1[3]= {NORMAL_STATE,NORMAL_STATE,NORMAL_STATE};
+//int keyReg2[3]= {NORMAL_STATE,NORMAL_STATE,NORMAL_STATE};
+int keyReg0 = NORMAL_STATE;
+int keyReg1 = NORMAL_STATE;
+int keyReg2 = NORMAL_STATE;
+
+int keyReg3 = NORMAL_STATE;
+
+int timerForKey = 100;
+
+int button1_flag=0;
+
+void subKeyProcess(){
+	button1_flag=1;
+}
+
+void getKeyInput(){
+	keyReg0 = keyReg1;
+	keyReg1 = keyReg2;
+	keyReg2 = HAL_GPIO_ReadPin(RESET_GPIO_Port, RESET_Pin);
+
+	if((keyReg0==keyReg1)&&(keyReg1==keyReg2)){
+		if(keyReg2!=keyReg3){
+			keyReg3=keyReg2;
+			if(keyReg2==PRESSED_STATE){
+				timerForKey=200;
+				//TODO
+				subKeyProcess();
+			}
+		}
+		else{
+			timerForKey--;
+			if(timerForKey==0){
+				keyReg3=NORMAL_STATE;
+			}
+		}
+	}
+
+}
